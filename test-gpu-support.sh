@@ -1,0 +1,1 @@
+docker run --gpus all nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04 nvidia-smi
