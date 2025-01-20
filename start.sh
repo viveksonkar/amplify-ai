@@ -51,3 +51,6 @@ docker run --gpus all -it --rm `
    -v "~/.cache/huggingface:/root/.cache/huggingface" `
    -v "C:/Stuff/Work/Development/FreeLancing/Amplify/amplify-ai/output:/workspace/output" `
    ai-video-generator
+
+
+docker run --gpus all -d -p 7860:7860 --name ai-video-generator-container ai-video-generator-a1111

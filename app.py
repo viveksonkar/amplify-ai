@@ -1,43 +1,52 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import uuid
-
-from generate_video import create_video_from_prompt
-from generate_image import create_image_from_prompt
+import requests
 
 app = FastAPI()
 
-class PromptRequest(BaseModel):
+class GenerateImageRequest(BaseModel):
     prompt: str
+    steps: int = 50
+    cfg_scale: float = 7.5
+    width: int = 512
+    height: int = 512
 
-@app.post("/generate-video")
-def generate_video_endpoint(request: PromptRequest):
-    """Generate a video based on a user prompt."""
-    try:
-        # Generate a unique file name for the output video
-        video_id = str(uuid.uuid4())
-        output_path = f"/workspace/output/output_{video_id}.mp4"
+class GenerateVideoRequest(BaseModel):
+    prompt: str
+    steps_per_frame: int = 30
+    total_frames: int = 120
+    cfg_scale: float = 7.5
 
-        # Call the Stable Diffusion + MoviePy pipeline
-        create_video_from_prompt(request.prompt, output_path)
-
-        # Return the location of the generated video
-        return {"status": "success", "video_path": output_path}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+AUTOMATIC_API_URL = "http://localhost:7860"
 
 @app.post("/generate-image")
-def generate_image_endpoint(request: PromptRequest):
-    """Generate a single image based on a user prompt."""
+def generate_image(request: GenerateImageRequest):
     try:
-        # Generate a unique file name for the output image
-        image_id = str(uuid.uuid4())
-        output_path = f"/workspace/output/output_{image_id}.png"
+        payload = {
+            "prompt": request.prompt,
+            "steps": request.steps,
+            "cfg_scale": request.cfg_scale,
+            "width": request.width,
+            "height": request.height,
+        }
+        response = requests.post(f"{AUTOMATIC_API_URL}/sdapi/v1/txt2img", json=payload)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-        # Call the Stable Diffusion pipeline for image generation
-        create_image_from_prompt(request.prompt, output_path)
-
-        # Return the location of the generated image
-        return {"status": "success", "image_path": output_path}
-    except Exception as e:
+@app.post("/generate-video")
+def generate_video(request: GenerateVideoRequest):
+    try:
+        # Assume Deforum or animation features are enabled in Automatic1111 setup
+        payload = {
+            "prompt": request.prompt,
+            "cfg_scale": request.cfg_scale,
+            "steps_per_frame": request.steps_per_frame,
+            "frames": request.total_frames,
+        }
+        response = requests.post(f"{AUTOMATIC_API_URL}/sdapi/v1/txt2vid", json=payload)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
         raise HTTPException(status_code=500, detail=str(e))
