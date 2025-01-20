@@ -9,3 +9,18 @@ Content-Type: application/json
 curl -X POST "http://localhost:8000/generate-image" \
 -H "Content-Type: application/json" \
 -d '{"prompt": "Lord Krishna on Chariot in Mahabharat scene with eye dropping graphics"}'
+
+
+### GENERATE IMAGE ENDPOINT
+curl -X POST "http://localhost:7860/sdapi/v1/txt2img" \
+-H "Content-Type: application/json" \
+-d '{
+  "prompt": "A futuristic cityscape at sunset, vibrant colors, highly detailed, ultra HD",
+  "steps": 50,
+  "cfg_scale": 7.5,
+  "width": 512,
+  "height": 512,
+  "sampler_name": "Euler a",
+  "batch_size": 1,
+  "seed": -1
+}'
