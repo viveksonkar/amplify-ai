@@ -45,7 +45,7 @@ docker run --gpus all -it --rm  -p 8000:8000 -v ~/.cache/huggingface:/root/.cach
 
 docker run --gpus all -it --rm -p 8000:8000 -v ~/.cache/huggingface:/root/.cache/huggingface -v /mnt/c/Stuff/Work/Development/FreeLancing/Amplify/amplify-ai/output:/workspace/output ai-video-generator
 
-
+# Latest working command
 docker run --gpus all -it --rm `
    -p 8000:8000 `
    -v "~/.cache/huggingface:/root/.cache/huggingface" `

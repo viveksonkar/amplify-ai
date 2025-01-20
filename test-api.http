@@ -1,6 +1,11 @@
-POST http://localhost:8000/generate
+POST http://localhost:8000/generate-video
 Content-Type: application/json
 
 {
   "prompt": "A scifi robot playing game"
 }
+
+### GENERATE IMAGE ENDPOINT
+curl -X POST "http://localhost:8000/generate-image" \
+-H "Content-Type: application/json" \
+-d '{"prompt": "Lord Krishna on Chariot in Mahabharat scene with eye dropping graphics"}'
