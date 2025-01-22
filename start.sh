@@ -54,3 +54,13 @@ docker run --gpus all -it --rm `
 
 
 docker run --gpus all -d -p 7860:7860 --name ai-video-generator-container ai-video-generator-a1111
+
+docker run --gpus all -d -p 7860:7860 `
+  --name ai-video-generator-container `
+  -v "~/.cache/huggingface/hub/models:/workspace/stable-diffusion-webui/models" `
+  ai-video-generator-a1111
+
+docker run --gpus all -d -p 7860:7860 `
+  --name ai-video-generator-container `
+  -v "C:\Users\vivek\.cache\huggingface\hub\models:/workspace/stable-diffusion-webui/models" `
+  ai-video-generator-a1111
