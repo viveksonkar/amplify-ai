@@ -8,4 +8,4 @@ Content-Type: application/json
 ### GENERATE IMAGE ENDPOINT
 curl -X POST "http://localhost:8000/generate-image" \
 -H "Content-Type: application/json" \
--d '{"prompt": "Lord Krishna on Chariot in Mahabharat scene with eye dropping graphics"}'
+-d '{"prompt": "A futuristic microsoft arc mouse"}'

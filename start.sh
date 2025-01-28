@@ -49,5 +49,17 @@ docker run --gpus all -it --rm -p 8000:8000 -v ~/.cache/huggingface:/root/.cache
 docker run --gpus all -it --rm `
    -p 8000:8000 `
    -v "~/.cache/huggingface:/root/.cache/huggingface" `
-   -v "C:/Stuff/Work/Development/FreeLancing/Amplify/amplify-ai/output:/workspace/output" `
+   -v "C:\Users\vivek\.cache\huggingface\hub:/workspace/models" `
+   -v "C:\Stuff\Work\Development\FreeLancing\Amplify\amplify-ai\output:/workspace/output" `
    ai-video-generator
+
+
+docker run -v "C:\Users\vivek\.cache\huggingface:/root/.cache/huggingface ...
+
+docker run --gpus all -d --rm `
+   -p 8000:8000 `
+   -v "~/.cache/huggingface:/root/.cache/huggingface" `
+   -v "C:\Users\vivek\.cache\huggingface:/root/.cache/huggingface" `
+   -v "C:\Stuff\Work\Development\FreeLancing\Amplify\amplify-ai\output:/workspace/output" `
+   ai-video-generator
+

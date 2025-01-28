@@ -3,6 +3,7 @@ from diffusers import StableDiffusionPipeline
 
 # Global: load model once, reuse
 model_id = "CompVis/stable-diffusion-v1-4"
+#model_id = "/workspace/models/Stable-diffusion"
 print("Loading model. This may take a moment...")
 pipe = StableDiffusionPipeline.from_pretrained(
     model_id,
